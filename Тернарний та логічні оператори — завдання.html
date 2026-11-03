@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тернарний та логічні оператори — завдання</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1b1f2a;--mu:#5d6475;--ac:#4f46e5;--ok:#16a34a;--bd:#e2e5ee;--code:#12151f;--codetx:#e6e9f5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f121a;--card:#181c27;--tx:#e8eaf2;--mu:#9aa1b5;--ac:#818cf8;--ok:#4ade80;--bd:#272c3b;--code:#0a0c12}}
+:root[data-theme="dark"]{--bg:#0f121a;--card:#181c27;--tx:#e8eaf2;--mu:#9aa1b5;--ac:#818cf8;--ok:#4ade80;--bd:#272c3b;--code:#0a0c12}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:16px}
+header h1{font-size:1.5rem;margin:.6rem 0 .2rem}
+header p{color:var(--mu);margin:0 0 .8rem}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5}
+.track{height:10px;background:var(--bd);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--ok);transition:width .3s}
+.bar small{color:var(--mu)}
+h2{font-size:1.15rem;margin:1.6rem 0 .6rem;color:var(--ac)}
+.task{background:var(--card);border:1px solid var(--bd);border-radius:12px;margin:10px 0;padding:14px}
+.task.done{border-color:var(--ok)}
+.task h3{margin:0 0 6px;font-size:1.05rem}
+.task p{margin:.4rem 0}
+pre{background:var(--code);color:var(--codetx);padding:12px;border-radius:8px;overflow-x:auto;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;margin:.5rem 0;position:relative}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--bd);padding:1px 5px;border-radius:4px;font-size:.92em}
+pre code{background:none;padding:0}
+.cp{float:right;margin:-4px -4px 4px 8px;font-size:12px;background:#2a3047;color:#fff;border:0;border-radius:6px;padding:4px 8px;cursor:pointer}
+details{margin:.5rem 0;color:var(--mu)}
+summary{cursor:pointer;color:var(--ac);font-weight:600}
+label.chk{display:flex;gap:8px;align-items:center;margin-top:8px;font-weight:600;min-height:44px}
+label.chk input{width:22px;height:22px;accent-color:var(--ok)}
+.btn{display:inline-block;margin-top:8px;padding:10px 14px;border-radius:8px;background:var(--ac);color:#fff;text-decoration:none;font-weight:600;border:0;cursor:pointer}
+.tip{background:var(--bd);border-radius:8px;padding:10px 12px;margin:.6rem 0;font-size:.95rem}
+ul{padding-left:1.2rem}
+footer{color:var(--mu);font-size:.9rem;margin:2rem 0 1rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>🧠 Тернарний та логічні оператори</h1>
+<p>JavaScript, 16–18 років. Читай умову на телефоні, а код пиши й запускай на комп’ютері у VS Code. Познач виконане завдання галочкою.</p>
+<div class="tip"><b>Як працювати у VS Code:</b><ol style="margin:.4rem 0 0;padding-left:1.2rem"><li>Створи папку <code>operators</code> і відкрий її у VS Code.</li><li>Для кожного завдання створюй окремий файл: <code>task1.js</code>, <code>task2.js</code> тощо.</li><li>Запускай у терміналі (<code>Ctrl+`</code>): <code>node task1.js</code>. Результат дивись у <code>console.log</code>.</li><li>Спочатку передбач результат у голові чи в зошиті, потім перевір кодом.</li></ol><p style="margin:.5rem 0 0">Підказки сховані — не поспішай їх відкривати.</p></div>
+</header>
+
+<div class="bar"><div class="track"><div class="fill" id="fill"></div></div><small id="cnt">Виконано 0 з 11</small></div>
+
+<h2>Рівень 1. Розминка: логічні оператори</h2>
+
+<div class="task" data-id="1">
+<h3>1. Передбач результат</h3>
+<p>Запиши, що виведе кожен рядок, і лише потім запусти.</p>
+<pre><code>console.log(true &amp;&amp; false);
+console.log(true || false);
+console.log(!true &amp;&amp; false);
+console.log(!(true &amp;&amp; false));
+console.log(5 > 3 &amp;&amp; 2 > 10);
+console.log("" || "гість");
+console.log("Оля" &amp;&amp; "Привіт");
+console.log(0 || null || "порожньо");
+console.log(1 &amp;&amp; 2 &amp;&amp; 3);
+console.log(null ?? "за замовчуванням");
+console.log(0 ?? "за замовчуванням");</code></pre>
+<p><b>Питання:</b> чому <code>0 || "x"</code> і <code>0 ?? "x"</code> дають різне? Чому це критично, якщо в грі 0 очок?</p>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<div class="task" data-id="2">
+<h3>2. Охоронець нічного клубу</h3>
+<p>Змінні: <code>age</code>, <code>hasTicket</code>, <code>isVIP</code>. Пускають, якщо вік 18+ <b>і</b> (є квиток <b>або</b> VIP). Напиши одну умову та перевір її на 5 наборах даних. Склади таблицю «вхід → результат».</p>
+<details><summary>Підказка</summary>Зверни увагу на дужки: без них <code>&amp;&amp;</code> виконається раніше за <code>||</code>.</details>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<h2>Рівень 2. Тернарний оператор</h2>
+
+<div class="task" data-id="3">
+<h3>3. Світлофор</h3>
+<p>Змінна <code>color</code> = <code>"red"</code>, <code>"yellow"</code> або <code>"green"</code>. Через тернарний оператор виведи: «Стій!», «Приготуйся», «Їдь!».</p>
+<details><summary>Підказка</summary>Тернарні можна вкладати: <code>a ? x : b ? y : z</code>. Але подумай, чи читабельно це.</details>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<div class="task" data-id="4">
+<h3>4. Рефакторинг</h3>
+<p>Перепиши через тернарний оператор:</p>
+<pre><code>let message;
+if (score >= 90) {
+  message = "Відмінно";
+} else if (score >= 60) {
+  message = "Добре";
+} else {
+  message = "Спробуй ще";
+}</code></pre>
+<p>Що читається краще: <code>if/else</code> чи тернарний варіант? Чому?</p>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<div class="task" data-id="5">
+<h3>5. Котики: відмінювання</h3>
+<p>Функція <code>pluralize(n)</code> повертає: <i>1 котик, 2 котики, 5 котиків</i>.</p>
+<ul><li>Крок 1: лише «1» або «більше».</li><li>Крок 2: врахуй 11–14 і закінчення на 1, 2–4. Використай <code>&amp;&amp;</code>, <code>||</code> і тернарний разом.</li></ul>
+<details><summary>Підказка</summary>Корисні вирази: <code>n % 10</code> і <code>n % 100</code>.</details>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<h2>Рівень 3. Міні-ігри та сценарії</h2>
+
+<div class="task" data-id="6">
+<h3>6. Камінь-ножиці-папір</h3>
+<p>Змінні <code>player</code> і <code>computer</code>: <code>"rock"</code>, <code>"scissors"</code>, <code>"paper"</code>. Результат: «Нічия», «Ти переміг», «Комп’ютер переміг» — <b>лише</b> логічні й тернарний оператори, без <code>switch</code>.</p>
+<p><b>Бонус:</b> вибір комп’ютера через <code>Math.random()</code>.</p>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<div class="task" data-id="7">
+<h3>7. Перевірка пароля</h3>
+<p>Функція <code>checkPassword(pwd)</code> повертає:</p>
+<ul><li>«Надійний» — довжина ≥ 8 <b>і</b> є цифра <b>і</b> є велика літера;</li><li>«Середній» — виконано щонайменше дві умови з трьох;</li><li>«Слабкий» — інакше.</li></ul>
+<details><summary>Підказка</summary><pre><code>/\d/.test(pwd)
+pwd !== pwd.toLowerCase()</code></pre>Булеві значення можна додавати: <code>true + true === 2</code>.</details>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<div class="task" data-id="8">
+<h3>8. Кіноафіша</h3>
+<pre><code>const user = { age: 16, hasParents: true, isStudent: true, balance: 120 };
+const movie = { ageLimit: 16, price: 150 };</code></pre>
+<ul><li>Фільм 16+ можна дивитися, якщо вік ≥ 16 <b>або</b> (вік ≥ 12 і є дорослий поруч).</li><li>Студент має знижку 20%.</li><li>Вивід: «Квиток куплено за X грн», «Недостатньо коштів» або «Вік не підходить».</li></ul>
+<p>Реалізуй через тернарні, потім перепиши через <code>if/else</code> і порівняй.</p>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<h2>Рівень 4. Челенджі для сильних</h2>
+
+<div class="task" data-id="9">
+<h3>9. Ловимо баги з коротким замиканням</h3>
+<pre><code>const user = { name: "Іра" };
+console.log(user.address.city);</code></pre>
+<p>Що не так? Напиши 3 способи безпечно отримати <code>city</code>: через <code>&amp;&amp;</code>, через <code>?.</code>, через <code>?.</code> разом з <code>??</code>.</p>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<div class="task" data-id="10">
+<h3>10. Високосний рік в один рядок</h3>
+<p>Рік високосний, якщо ділиться на 4 і не ділиться на 100, <b>окрім</b> випадків, коли ділиться на 400. Напиши <code>isLeap(year)</code> одним виразом без <code>if</code>. Перевір: 1900, 2000, 2024, 2100.</p>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<div class="task" data-id="11">
+<h3>11. FizzBuzz 2.0</h3>
+<p>Для чисел 1–50: кратне 3 → «Fizz», кратне 5 → «Buzz», кратне обом → «FizzBuzz», інакше саме число.</p>
+<p>Спочатку через вкладені тернарні, потім спробуй такий варіант і поясни, як він працює:</p>
+<pre><code>(n % 3 ? "" : "Fizz") + (n % 5 ? "" : "Buzz") || n</code></pre>
+<label class="chk"><input type="checkbox"> Виконано</label>
+</div>
+
+<h2>🪞 Рефлексія</h2>
+<div class="task">
+<ol>
+<li>Коли тернарний оператор покращує код, а коли погіршує?</li>
+<li>Чим <code>||</code> відрізняється від <code>??</code>?</li>
+<li>Що таке коротке замикання (short-circuit) і навіщо воно?</li>
+<li>Складну умову розбити на змінні з зрозумілими іменами чи лишити в одному рядку?</li>
+</ol>
+</div>
+
+<footer>
+<button class="btn" id="reset" type="button">Скинути прогрес</button>
+<p>Прогрес зберігається лише в цьому браузері. На іншому пристрої він буде порожнім.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var KEY="ternary-progress";
+  var boxes=[].slice.call(document.querySelectorAll(".task[data-id] input[type=checkbox]"));
+  var fill=document.getElementById("fill"),cnt=document.getElementById("cnt");
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){saved={};}
+  function update(){
+    var n=0,s={};
+    boxes.forEach(function(b){
+      var t=b.closest(".task");
+      t.classList.toggle("done",b.checked);
+      if(b.checked){n++;s[t.dataset.id]=1;}
+    });
+    fill.style.width=(n/boxes.length*100)+"%";
+    cnt.textContent="Виконано "+n+" з "+boxes.length+(n===boxes.length?" 🏆 Майстер умов!":"");
+    try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}
+  }
+  boxes.forEach(function(b){
+    var id=b.closest(".task").dataset.id;
+    b.checked=!!saved[id];
+    b.addEventListener("change",update);
+  });
+  document.getElementById("reset").addEventListener("click",function(){
+    boxes.forEach(function(b){b.checked=false;});update();
+  });
+  document.querySelectorAll("pre").forEach(function(p){
+    var btn=document.createElement("button");
+    btn.className="cp";btn.type="button";btn.textContent="Копіювати";
+    btn.addEventListener("click",function(){
+      var txt=p.querySelector("code").innerText;
+      var done=function(){btn.textContent="Скопійовано ✓";setTimeout(function(){btn.textContent="Копіювати";},1500);};
+      try{navigator.clipboard.writeText(txt).then(done,function(){});}catch(e){}
+    });
+    p.insertBefore(btn,p.firstChild);
+  });
+  update();
+})();
+</script>
+</body>
+</html>
