@@ -100,8 +100,8 @@ if (score >= 90) {
 
 <div class="task" data-id="5">
 <h3>5. Котики: відмінювання</h3>
-<p>Функція <code>pluralize(n)</code> повертає: <i>1 котик, 2 котики, 5 котиків</i>.</p>
-<ul><li>Крок 1: лише «1» або «більше».</li><li>Крок 2: врахуй 11–14 і закінчення на 1, 2–4. Використай <code>&amp;&amp;</code>, <code>||</code> і тернарний разом.</li></ul>
+<p>Є змінна <code>let n = 5;</code>. Виведи в консоль: <i>1 котик, 2 котики, 5 котиків</i> (залежно від <code>n</code>).</p>
+<ul><li>Крок 1: лише «1 котик» або «котики».</li><li>Крок 2: врахуй 11–14 і закінчення на 1, 2–4. Використай <code>&amp;&amp;</code>, <code>||</code> і тернарний разом.</li><li>Перевір на: 1, 2, 5, 11, 12, 21, 24, 100.</li></ul>
 <details><summary>Підказка</summary>Корисні вирази: <code>n % 10</code> і <code>n % 100</code>.</details>
 <label class="chk"><input type="checkbox"> Виконано</label>
 </div>
@@ -111,23 +111,25 @@ if (score >= 90) {
 <div class="task" data-id="6">
 <h3>6. Камінь-ножиці-папір</h3>
 <p>Змінні <code>player</code> і <code>computer</code>: <code>"rock"</code>, <code>"scissors"</code>, <code>"paper"</code>. Результат: «Нічия», «Ти переміг», «Комп’ютер переміг» — <b>лише</b> логічні й тернарний оператори, без <code>switch</code>.</p>
-<p><b>Бонус:</b> вибір комп’ютера через <code>Math.random()</code>.</p>
+<p><b>Бонус:</b> зроби так, щоб повідомлення містило вибір обох гравців, наприклад «rock проти paper: Комп’ютер переміг».</p>
 <label class="chk"><input type="checkbox"> Виконано</label>
 </div>
 
 <div class="task" data-id="7">
 <h3>7. Перевірка пароля</h3>
-<p>Функція <code>checkPassword(pwd)</code> повертає:</p>
+<p>Є три змінні: <code>length</code> (довжина пароля, число), <code>hasDigit</code> і <code>hasUpper</code> (<code>true</code> або <code>false</code>). Виведи в консоль:</p>
 <ul><li>«Надійний» — довжина ≥ 8 <b>і</b> є цифра <b>і</b> є велика літера;</li><li>«Середній» — виконано щонайменше дві умови з трьох;</li><li>«Слабкий» — інакше.</li></ul>
-<details><summary>Підказка</summary><pre><code>/\d/.test(pwd)
-pwd !== pwd.toLowerCase()</code></pre>Булеві значення можна додавати: <code>true + true === 2</code>.</details>
+<details><summary>Підказка</summary>Для «Середній» перебери комбінації через <code>&amp;&amp;</code> і <code>||</code>. Або порахуй, скільки умов <code>true</code>: <code>true + true === 2</code>.</details>
 <label class="chk"><input type="checkbox"> Виконано</label>
 </div>
 
 <div class="task" data-id="8">
 <h3>8. Кіноафіша</h3>
-<pre><code>const user = { age: 16, hasParents: true, isStudent: true, balance: 120 };
-const movie = { ageLimit: 16, price: 150 };</code></pre>
+<pre><code>let age = 16;
+let hasAdult = true;
+let isStudent = true;
+let balance = 120;
+let price = 150; // ціна квитка на фільм 16+</code></pre>
 <ul><li>Фільм 16+ можна дивитися, якщо вік ≥ 16 <b>або</b> (вік ≥ 12 і є дорослий поруч).</li><li>Студент має знижку 20%.</li><li>Вивід: «Квиток куплено за X грн», «Недостатньо коштів» або «Вік не підходить».</li></ul>
 <p>Реалізуй через тернарні, потім перепиши через <code>if/else</code> і порівняй.</p>
 <label class="chk"><input type="checkbox"> Виконано</label>
@@ -137,21 +139,21 @@ const movie = { ageLimit: 16, price: 150 };</code></pre>
 
 <div class="task" data-id="9">
 <h3>9. Ловимо баги з коротким замиканням</h3>
-<pre><code>const user = { name: "Іра" };
-console.log(user.address.city);</code></pre>
-<p>Що не так? Напиши 3 способи безпечно отримати <code>city</code>: через <code>&amp;&amp;</code>, через <code>?.</code>, через <code>?.</code> разом з <code>??</code>.</p>
+<pre><code>let score = 0;
+console.log("Очки: " + (score || "ще не грав"));</code></pre>
+<p>Гравець набрав 0 очок, але програма пише «ще не грав». Чому? Виправ одним оператором. Потім зроби так, щоб для <code>score = undefined</code> і <code>score = null</code> знову було «ще не грав».</p><p>Додатково: що виведе <code>score &amp;&amp; "є очки"</code> при <code>score = 0</code> і при <code>score = 5</code>?</p>
 <label class="chk"><input type="checkbox"> Виконано</label>
 </div>
 
 <div class="task" data-id="10">
 <h3>10. Високосний рік в один рядок</h3>
-<p>Рік високосний, якщо ділиться на 4 і не ділиться на 100, <b>окрім</b> випадків, коли ділиться на 400. Напиши <code>isLeap(year)</code> одним виразом без <code>if</code>. Перевір: 1900, 2000, 2024, 2100.</p>
+<p>Рік високосний, якщо ділиться на 4 і не ділиться на 100, <b>окрім</b> випадків, коли ділиться на 400. Є змінна <code>let year = 2024;</code>. Запиши одним виразом без <code>if</code> і виведи <code>true</code> або <code>false</code>. Перевір для: 1900, 2000, 2024, 2100. Підказка: <code>%</code> дає залишок від ділення.</p>
 <label class="chk"><input type="checkbox"> Виконано</label>
 </div>
 
 <div class="task" data-id="11">
 <h3>11. FizzBuzz 2.0</h3>
-<p>Для чисел 1–50: кратне 3 → «Fizz», кратне 5 → «Buzz», кратне обом → «FizzBuzz», інакше саме число.</p>
+<p>Є змінна <code>let n = 15;</code>. Кратне 3 → «Fizz», кратне 5 → «Buzz», кратне обом → «FizzBuzz», інакше саме число. Перевір для: 3, 5, 15, 7.</p>
 <p>Спочатку через вкладені тернарні, потім спробуй такий варіант і поясни, як він працює:</p>
 <pre><code>(n % 3 ? "" : "Fizz") + (n % 5 ? "" : "Buzz") || n</code></pre>
 <label class="chk"><input type="checkbox"> Виконано</label>
