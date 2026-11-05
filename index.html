@@ -42,123 +42,83 @@ footer{color:var(--mu);font-size:.9rem;margin:2rem 0 1rem}
 <header>
 <h1>🧠 Тернарний та логічні оператори</h1>
 <p>JavaScript, 16–18 років. Читай умову на телефоні, а код пиши й запускай на комп’ютері у VS Code. Познач виконане завдання галочкою.</p>
-<div class="tip"><b>Як працювати у VS Code:</b><ol style="margin:.4rem 0 0;padding-left:1.2rem"><li>Створи папку <code>operators</code> і відкрий її у VS Code.</li><li>Для кожного завдання створюй окремий файл: <code>task1.js</code>, <code>task2.js</code> тощо.</li><li>Запускай у терміналі (<code>Ctrl+`</code>): <code>node task1.js</code>. Результат дивись у <code>console.log</code>.</li><li>Спочатку передбач результат у голові чи в зошиті, потім перевір кодом.</li></ol><p style="margin:.5rem 0 0">Підказки сховані — не поспішай їх відкривати.</p></div>
+<div class="tip"><b>Як працювати у VS Code:</b><ol style="margin:.4rem 0 0;padding-left:1.2rem"><li>Створи папку <code>operators</code> і відкрий її у VS Code.</li><li>Для кожного завдання створюй окремий файл: <code>task1.js</code>, <code>task2.js</code> тощо.</li><li>Запускай у терміналі (<code>Ctrl+`</code>): <code>node task1.js</code>. Результат дивись у <code>console.log</code>.</li><li>Спочатку передбач результат у голові чи в зошиті, потім перевір кодом.</li></ol><p style="margin:.5rem 0 0">Підказки сховані — не поспішай їх відкривати. Хочеш вводити значення вручну? Дивись у довідці розділ про <code>prompt</code> і <code>confirm</code>.</p></div>
 </header>
 
 <div class="bar"><div class="track"><div class="fill" id="fill"></div></div><small id="cnt">Виконано 0 з 11</small></div>
 
-<h2>Рівень 1. Розминка: логічні оператори</h2>
+<h2>📘 Довідка: що потрібно знати</h2>
+<div class="task" style="color:var(--tx)">
+<details><summary>Хибні значення (falsy)</summary><p>В умові хибними вважаються лише шість значень: <code>false</code>, <code>0</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>. Усе інше істинне, навіть рядки <code>"0"</code> і <code>"false"</code>.</p></details>
+<details><summary>&amp;&amp; та || повертають значення</summary><p>Вони не завжди дають <code>true</code>/<code>false</code>, а повертають одне зі значень, яке порівнювали.</p><ul><li><code>a &amp;&amp; b</code>: якщо <code>a</code> хибне, повертає <code>a</code>, інакше <code>b</code>.</li><li><code>a || b</code>: якщо <code>a</code> істинне, повертає <code>a</code>, інакше <code>b</code>.</li></ul><pre><code>"Оля" &amp;&amp; "Привіт"  // Привіт
+0 &amp;&amp; "Привіт"     // 0
+"" || "гість"     // гість</code></pre></details>
+<details><summary>?? — що це таке</summary><p><code>??</code> (оператор null-злиття) бере значення зліва, а якщо там <code>null</code> або <code>undefined</code>, то значення справа. На відміну від <code>||</code>, він не вважає порожніми <code>0</code>, <code>""</code> і <code>false</code>.</p><pre><code>let score = 0;
+console.log(score || "немає");  // немає (помилка!)
+console.log(score ?? "немає");  // 0 (правильно)</code></pre><p>Правило: <code>??</code> не можна змішувати з <code>||</code> чи <code>&amp;&amp;</code> без дужок: <code>(a ?? b) || c</code>.</p></details>
+<details><summary>prompt і confirm: вводимо значення вручну</summary><p><code>prompt("Питання")</code> показує віконце з полем вводу й повертає введений <b>рядок</b> (а <code>null</code>, якщо натиснули «Скасувати»). Для числа обгорніть: <code>Number(prompt("Скільки років?"))</code>.</p><p><code>confirm("Питання")</code> показує віконце з кнопками «ОК» і «Скасувати» й повертає <code>true</code> (ОК) або <code>false</code> (Скасувати).</p><pre><code>let age = Number(prompt("Скільки тобі років?"));
+let hasTicket = confirm("Чи є квиток?");
+console.log(age >= 18 &amp;&amp; hasTicket);</code></pre><p><b>Важливо:</b> <code>prompt</code> і <code>confirm</code> працюють лише в браузері, а в терміналі з <code>node</code> їх немає. Тому створіть у папці два файли:</p><pre><code>&lt;!-- index.html --&gt;
+&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre><p>У <code>script.js</code> пишіть код. Відкрийте <code>index.html</code> через Live Server (розширення VS Code), віконця з’являться самі, а результат дивіться в консолі браузера (F12, вкладка Console).</p></details>
+<details><summary>Пріоритет операторів</summary><p>Спочатку <code>!</code>, потім <code>&amp;&amp;</code>, потім <code>||</code>. Тому в <code>a || b &amp;&amp; c</code> спершу виконується <code>b &amp;&amp; c</code>. Дужки змінюють порядок і роблять код зрозумілішим.</p></details>
+<details><summary>Тернарний оператор</summary><p>Це скорочений <code>if/else</code>: <code>умова ? якщо_так : якщо_ні</code>. Обидві гілки обов’язкові, а результат можна покласти у змінну.</p><pre><code>let word = n === 1 ? "котик" : "котики";</code></pre></details>
+<details><summary>Оператор % (залишок від ділення)</summary><p><code>7 % 2</code> дорівнює <code>1</code>, <code>10 % 5</code> дорівнює <code>0</code>. Якщо <code>n % 3 === 0</code>, число ділиться на 3 націло.</p></details>
+</div>
 
-<div class="task" data-id="1">
-<h3>1. Передбач результат</h3>
-<p>Запиши, що виведе кожен рядок, і лише потім запусти.</p>
-<pre><code>console.log(true &amp;&amp; false);
+<div class="tip"><b>Як читати завдання.</b> У блоці «Дано» перелічені змінні: що це за змінна і яке значення вона зберігає, написано в коментарі після <code>//</code>. Копіюйте блок на початок файлу, пишіть рішення нижче й <b>змінюйте значення змінних</b>, щоб перевірити різні випадки. Результат завжди виводьте через <code>console.log(...)</code>.</div>
+<h2>Рівень 1. Розминка: логічні оператори</h2>
+<div class="task" data-id="1"><h3>1. Передбач результат</h3><p><b>Завдання:</b> Змінних тут немає: кожен рядок вже містить готовий вираз. Спершу запиши свою відповідь для кожного рядка, потім запусти код і порівняй.</p><pre><code>console.log(true &amp;&amp; false);
 console.log(true || false);
 console.log(!true &amp;&amp; false);
 console.log(!(true &amp;&amp; false));
-console.log(5 > 3 &amp;&amp; 2 > 10);
+console.log(5 &gt; 3 &amp;&amp; 2 &gt; 10);
 console.log("" || "гість");
 console.log("Оля" &amp;&amp; "Привіт");
 console.log(0 || null || "порожньо");
 console.log(1 &amp;&amp; 2 &amp;&amp; 3);
 console.log(null ?? "за замовчуванням");
-console.log(0 ?? "за замовчуванням");</code></pre>
-<p><b>Питання:</b> чому <code>0 || "x"</code> і <code>0 ?? "x"</code> дають різне? Чому це критично, якщо в грі 0 очок?</p>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
-<div class="task" data-id="2">
-<h3>2. Охоронець нічного клубу</h3>
-<p>Змінні: <code>age</code>, <code>hasTicket</code>, <code>isVIP</code>. Пускають, якщо вік 18+ <b>і</b> (є квиток <b>або</b> VIP). Напиши одну умову та перевір її на 5 наборах даних. Склади таблицю «вхід → результат».</p>
-<details><summary>Підказка</summary>Зверни увагу на дужки: без них <code>&amp;&amp;</code> виконається раніше за <code>||</code>.</details>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
+console.log(0 ?? "за замовчуванням");</code></pre><p><b>Очікувано:</b> кожен рядок виводить значення, а питання нижче допоможуть пояснити різницю.</p><p><b>Питання:</b> чому <code>0 || "x"</code> і <code>0 ?? "x"</code> дають різне? Чому це важливо, якщо в грі гравець має 0 очок?</p><label class="chk"><input type="checkbox"> Виконано</label></div>
+<div class="task" data-id="2"><h3>2. Охоронець нічного клубу</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let age = 20;         // вік гостя, число
+let hasTicket = true; // чи є квиток: true — є, false — немає
+let isVIP = false;    // чи VIP-гість: true — так, false — ні</code></pre><p><b>Завдання:</b> Напиши <b>одну</b> умову й виведи її результат: <code>true</code> — гостя пускають, <code>false</code> — ні. Пускають, якщо йому 18 або більше <b>і</b> (є квиток <b>або</b> він VIP). Перевір на 5 наборах значень і склади таблицю «age, hasTicket, isVIP → результат».</p><p><b>Очікувано:</b> для наведених даних у консолі <code>true</code>. Для <code>age = 17</code>, <code>hasTicket = true</code>, <code>isVIP = true</code> має бути <code>false</code>.</p><details><summary>Підказка</summary>Якщо умова в тебе складається з двох частин різного типу (<code>&amp;&amp;</code> і <code>||</code>), подумай про дужки.</details><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let age = Number(prompt("Скільки років гостю?"));
+let hasTicket = confirm("Чи є квиток? (ОК — так, Скасувати — ні)");
+let isVIP = confirm("Це VIP-гість?");</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
 <h2>Рівень 2. Тернарний оператор</h2>
-
-<div class="task" data-id="3">
-<h3>3. Світлофор</h3>
-<p>Змінна <code>color</code> = <code>"red"</code>, <code>"yellow"</code> або <code>"green"</code>. Через тернарний оператор виведи: «Стій!», «Приготуйся», «Їдь!».</p>
-<details><summary>Підказка</summary>Тернарні можна вкладати: <code>a ? x : b ? y : z</code>. Але подумай, чи читабельно це.</details>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
-<div class="task" data-id="4">
-<h3>4. Рефакторинг</h3>
-<p>Перепиши через тернарний оператор:</p>
-<pre><code>let message;
-if (score >= 90) {
+<div class="task" data-id="3"><h3>3. Світлофор</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let color = "red"; // колір світлофора: "red", "yellow" або "green"</code></pre><p><b>Завдання:</b> Через тернарний оператор виведи текст: для <code>"red"</code> — «Стій!», для <code>"yellow"</code> — «Приготуйся», для <code>"green"</code> — «Їдь!». Перевір усі три значення.</p><p><b>Очікувано:</b> для <code>"red"</code> у консолі «Стій!».</p><details><summary>Підказка</summary>Тернарні можна вкладати: <code>a ? x : b ? y : z</code>. Подумай, чи залишається код читабельним.</details><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let color = prompt("Колір світлофора: red, yellow чи green?");</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
+<div class="task" data-id="4"><h3>4. Рефакторинг</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let score = 75; // бали за тест, число від 0 до 100</code></pre><p><b>Завдання:</b> Нижче код з <code>if/else</code>. Перепиши його через тернарний оператор (одна змінна <code>message</code>, вивід через <code>console.log(message)</code>). Потім відповідай: що читається краще і чому?</p><pre><code>let message;
+if (score &gt;= 90) {
   message = "Відмінно";
-} else if (score >= 60) {
+} else if (score &gt;= 60) {
   message = "Добре";
 } else {
   message = "Спробуй ще";
-}</code></pre>
-<p>Що читається краще: <code>if/else</code> чи тернарний варіант? Чому?</p>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
-<div class="task" data-id="5">
-<h3>5. Котики: відмінювання</h3>
-<p>Є змінна <code>let n = 5;</code>. Виведи в консоль: <i>1 котик, 2 котики, 5 котиків</i> (залежно від <code>n</code>).</p>
-<ul><li>Крок 1: лише «1 котик» або «котики».</li><li>Крок 2: врахуй 11–14 і закінчення на 1, 2–4. Використай <code>&amp;&amp;</code>, <code>||</code> і тернарний разом.</li><li>Перевір на: 1, 2, 5, 11, 12, 21, 24, 100.</li></ul>
-<details><summary>Підказка</summary>Корисні вирази: <code>n % 10</code> і <code>n % 100</code>.</details>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
+}
+console.log(message);</code></pre><p><b>Очікувано:</b> 75 → «Добре», 95 → «Відмінно», 40 → «Спробуй ще».</p><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let score = Number(prompt("Бали за тест (0–100):"));</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
+<div class="task" data-id="5"><h3>5. Котики: відмінювання</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let n = 5; // кількість котиків, ціле число від 1 до 100</code></pre><p><b>Завдання:</b> Виведи в консоль фразу з правильним словом: <i>1 котик, 2 котики, 5 котиків</i>. Крок 1: лише «котик» (n = 1) або «котики» (усі інші). Крок 2: врахуй числа 11–14 (котиків) і закінчення на 1 (котик), на 2–4 (котики). Використай <code>&amp;&amp;</code>, <code>||</code> і тернарний разом.</p><p><b>Очікувано:</b> 1 → «1 котик», 2 → «2 котики», 5 → «5 котиків», 11 → «11 котиків», 21 → «21 котик», 24 → «24 котики».</p><details><summary>Підказка</summary><code>n % 10</code> — остання цифра числа, <code>n % 100</code> — дві останні цифри.</details><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let n = Number(prompt("Скільки котиків?"));</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
 <h2>Рівень 3. Міні-ігри та сценарії</h2>
-
-<div class="task" data-id="6">
-<h3>6. Камінь-ножиці-папір</h3>
-<p>Змінні <code>player</code> і <code>computer</code>: <code>"rock"</code>, <code>"scissors"</code>, <code>"paper"</code>. Результат: «Нічия», «Ти переміг», «Комп’ютер переміг» — <b>лише</b> логічні й тернарний оператори, без <code>switch</code>.</p>
-<p><b>Бонус:</b> зроби так, щоб повідомлення містило вибір обох гравців, наприклад «rock проти paper: Комп’ютер переміг».</p>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
-<div class="task" data-id="7">
-<h3>7. Перевірка пароля</h3>
-<p>Є три змінні: <code>length</code> (довжина пароля, число), <code>hasDigit</code> і <code>hasUpper</code> (<code>true</code> або <code>false</code>). Виведи в консоль:</p>
-<ul><li>«Надійний» — довжина ≥ 8 <b>і</b> є цифра <b>і</b> є велика літера;</li><li>«Середній» — виконано щонайменше дві умови з трьох;</li><li>«Слабкий» — інакше.</li></ul>
-<details><summary>Підказка</summary>Для «Середній» перебери комбінації через <code>&amp;&amp;</code> і <code>||</code>. Або порахуй, скільки умов <code>true</code>: <code>true + true === 2</code>.</details>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
-<div class="task" data-id="8">
-<h3>8. Кіноафіша</h3>
-<pre><code>let age = 16;
-let hasAdult = true;
-let isStudent = true;
-let balance = 120;
-let price = 150; // ціна квитка на фільм 16+</code></pre>
-<ul><li>Фільм 16+ можна дивитися, якщо вік ≥ 16 <b>або</b> (вік ≥ 12 і є дорослий поруч).</li><li>Студент має знижку 20%.</li><li>Вивід: «Квиток куплено за X грн», «Недостатньо коштів» або «Вік не підходить».</li></ul>
-<p>Реалізуй через тернарні, потім перепиши через <code>if/else</code> і порівняй.</p>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
+<div class="task" data-id="6"><h3>6. Камінь-ножиці-папір</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let player = "rock";       // вибір гравця: "rock" (камінь), "scissors" (ножиці) або "paper" (папір)
+let computer = "scissors"; // вибір комп'ютера: ті самі три варіанти</code></pre><p><b>Завдання:</b> Виведи результат: «Нічия», «Ти переміг» або «Комп'ютер переміг». Правила: камінь б'є ножиці, ножиці б'ють папір, папір б'є камінь. Використай лише логічні й тернарний оператори, без <code>switch</code>.</p><p><b>Очікувано:</b> <code>rock</code> проти <code>scissors</code> → «Ти переміг», <code>paper</code> проти <code>paper</code> → «Нічия», <code>scissors</code> проти <code>rock</code> → «Комп'ютер переміг».</p><details><summary>Підказка</summary>Бонус: виведи рядок на кшталт «rock проти scissors: Ти переміг».</details><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let player = prompt("Твій вибір: rock, scissors чи paper?");
+let computer = prompt("Вибір комп'ютера: rock, scissors чи paper?");</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
+<div class="task" data-id="7"><h3>7. Перевірка пароля</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let length = 9;       // довжина пароля, кількість символів
+let hasDigit = true;  // чи є в паролі цифра: true — є, false — немає
+let hasUpper = false; // чи є в паролі велика літера: true — є, false — немає</code></pre><p><b>Завдання:</b> Три умови: (1) <code>length</code> не менше 8, (2) <code>hasDigit</code> дорівнює true, (3) <code>hasUpper</code> дорівнює true. Виведи «Надійний», якщо виконано всі три; «Середній», якщо виконано рівно дві; «Слабкий», якщо одна або жодної.</p><p><b>Очікувано:</b> <code>9, true, false</code> → «Середній»; <code>12, true, true</code> → «Надійний»; <code>5, false, false</code> → «Слабкий».</p><details><summary>Підказка</summary>У JavaScript <code>true + true</code> дорівнює <code>2</code>, тож умови можна порахувати.</details><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let pwd = prompt("Введи пароль:");
+let length = pwd.length;
+let hasDigit = confirm("Є в паролі цифра?");
+let hasUpper = confirm("Є велика літера?");</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
+<div class="task" data-id="8"><h3>8. Кіноафіша</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let age = 16;          // вік глядача, число
+let hasAdult = true;   // чи є поруч дорослий: true — є, false — немає
+let isStudent = true;  // чи студент: true — є знижка 20%, false — ціна без знижки
+let balance = 120;     // скільки грошей у глядача, грн
+let price = 150;       // повна ціна квитка на фільм 16+, грн</code></pre><p><b>Завдання:</b> Правила: фільм 16+ можна дивитися, якщо вік не менше 16 <b>або</b> (вік не менше 12 <b>і</b> поруч є дорослий). Студент платить на 20% менше. Виведи одне з повідомлень: «Квиток куплено за X грн», «Недостатньо коштів» або «Вік не підходить». Реалізуй через тернарні оператори, потім перепиши з <code>if/else</code> і порівняй.</p><p><b>Очікувано:</b> для наведених даних — «Квиток куплено за 120 грн». Для <code>age = 10</code> — «Вік не підходить», для <code>balance = 100</code> — «Недостатньо коштів».</p><details><summary>Підказка</summary>Спочатку обчисли ціну зі знижкою у змінну <code>finalPrice</code>, а умову перегляду винеси в <code>canWatch</code>.</details><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let age = Number(prompt("Скільки років глядачу?"));
+let hasAdult = confirm("Поруч є дорослий?");
+let isStudent = confirm("Глядач — студент?");
+let balance = Number(prompt("Скільки грошей (грн)?"));
+let price = Number(prompt("Ціна квитка (грн)?"));</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
 <h2>Рівень 4. Челенджі для сильних</h2>
-
-<div class="task" data-id="9">
-<h3>9. Ловимо баги з коротким замиканням</h3>
-<pre><code>let score = 0;
-console.log("Очки: " + (score || "ще не грав"));</code></pre>
-<p>Гравець набрав 0 очок, але програма пише «ще не грав». Чому? Виправ одним оператором. Потім зроби так, щоб для <code>score = undefined</code> і <code>score = null</code> знову було «ще не грав».</p><p>Додатково: що виведе <code>score &amp;&amp; "є очки"</code> при <code>score = 0</code> і при <code>score = 5</code>?</p>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
-<div class="task" data-id="10">
-<h3>10. Високосний рік в один рядок</h3>
-<p>Рік високосний, якщо ділиться на 4 і не ділиться на 100, <b>окрім</b> випадків, коли ділиться на 400. Є змінна <code>let year = 2024;</code>. Запиши одним виразом без <code>if</code> і виведи <code>true</code> або <code>false</code>. Перевір для: 1900, 2000, 2024, 2100. Підказка: <code>%</code> дає залишок від ділення.</p>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
-<div class="task" data-id="11">
-<h3>11. FizzBuzz 2.0</h3>
-<p>Є змінна <code>let n = 15;</code>. Кратне 3 → «Fizz», кратне 5 → «Buzz», кратне обом → «FizzBuzz», інакше саме число. Перевір для: 3, 5, 15, 7.</p>
-<p>Спочатку через вкладені тернарні, потім спробуй такий варіант і поясни, як він працює:</p>
-<pre><code>(n % 3 ? "" : "Fizz") + (n % 5 ? "" : "Buzz") || n</code></pre>
-<label class="chk"><input type="checkbox"> Виконано</label>
-</div>
-
+<div class="task" data-id="9"><h3>9. Ловимо баги з коротким замиканням</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let score = 0; // очки гравця: 0 — нормальне значення (грав, але набрав 0), undefined або null — гравець ще не грав</code></pre><p><b>Завдання:</b> Код <code>console.log("Очки: " + (score || "ще не грав"));</code> при <code>score = 0</code> виводить «ще не грав». Поясни, чому це помилка, і виправ <b>одним оператором</b>. Перевір чотири значення: <code>0</code>, <code>15</code>, <code>undefined</code>, <code>null</code>.</p><p><b>Очікувано:</b> 0 → «Очки: 0», 15 → «Очки: 15», <code>undefined</code> і <code>null</code> → «Очки: ще не грав».</p><details><summary>Підказка</summary>Додатково: що виведе <code>score &amp;&amp; "є очки"</code> при <code>score = 0</code> і при <code>score = 5</code>?</details><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let input = prompt("Очки гравця (Скасувати — ще не грав):");
+let score = input === null ? null : Number(input);</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
+<div class="task" data-id="10"><h3>10. Високосний рік в один рядок</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let year = 2024; // рік, ціле число</code></pre><p><b>Завдання:</b> Рік високосний, якщо ділиться на 4, але не ділиться на 100, <b>окрім</b> випадків, коли ділиться на 400. Виведи <code>true</code> або <code>false</code> одним виразом, без <code>if</code>.</p><p><b>Очікувано:</b> 1900 → <code>false</code>, 2000 → <code>true</code>, 2024 → <code>true</code>, 2100 → <code>false</code>.</p><details><summary>Підказка</summary><code>year % 4 === 0</code> означає, що рік ділиться на 4 націло.</details><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let year = Number(prompt("Введи рік:"));</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
+<div class="task" data-id="11"><h3>11. FizzBuzz 2.0</h3><p><b>Дано</b> (вставте на початок файлу):</p><pre><code>let n = 15; // число, яке перевіряємо</code></pre><p><b>Завдання:</b> Виведи «Fizz», якщо <code>n</code> ділиться на 3; «Buzz», якщо ділиться на 5; «FizzBuzz», якщо ділиться на обидва; інакше виведи саме число. Спочатку розв'яжи вкладеними тернарними, потім спробуй варіант із <code>||</code> і поясни, як він працює.</p><p><b>Очікувано:</b> 3 → «Fizz», 5 → «Buzz», 15 → «FizzBuzz», 7 → 7.</p><details><summary>Підказка</summary>Варіант для пояснення: <code>(n % 3 ? "" : "Fizz") + (n % 5 ? "" : "Buzz") || n</code>.</details><details><summary>Ввести значення через prompt і confirm</summary><p>Замість рядків «Дано» вставте це (запуск у браузері, див. довідку):</p><pre><code>let n = Number(prompt("Введи число:"));</code></pre></details><label class="chk"><input type="checkbox"> Виконано</label></div>
 <h2>🪞 Рефлексія</h2>
 <div class="task">
 <ol>
